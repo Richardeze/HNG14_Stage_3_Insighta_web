@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Insighta Labs+</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <span class="logo">Insighta Labs+</span>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profiles.html">Profiles</a>
+        <a href="search.html" class="active">Search</a>
+        <a href="account.html">Account</a>
+        <div id="nav-user"></div>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="page-header"><h1>Natural Language Search</h1></div>
+      <div class="search-bar">
+        <input id="search-input" placeholder='Try: "young males from nigeria" or "females above 30"'
+               onkeydown="if(event.key==='Enter') doSearch()">
+        <button class="btn btn-primary" onclick="doSearch()">Search</button>
+      </div>
+      <p style="color:#8b949e;font-size:13px;margin-bottom:24px">
+        Supported: gender (male/female), age groups (young/adult/senior/teenager), 
+        countries (nigeria/kenya/ghana...), age ranges (above 30/below 25)
+      </p>
+      <div id="results"></div>
+    </div>
+  </main>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/search.js"></script>
+</body>
+</html>

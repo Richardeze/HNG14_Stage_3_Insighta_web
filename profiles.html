@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profiles — Insighta Labs+</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <span class="logo">Insighta Labs+</span>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profiles.html" class="active">Profiles</a>
+        <a href="search.html">Search</a>
+        <a href="account.html">Account</a>
+        <div id="nav-user"></div>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Profiles</h1>
+        <div style="display:flex;gap:8px">
+          <a href="http://127.0.0.1:8000/api/profiles/export?format=csv" 
+             class="btn btn-secondary" id="export-btn">Export CSV</a>
+          <button class="btn btn-primary" id="create-btn" style="display:none">+ Create Profile</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group">
+          <label>Gender</label>
+          <select id="f-gender">
+            <option value="">All</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Age Group</label>
+          <select id="f-age-group">
+            <option value="">All</option>
+            <option value="child">Child</option>
+            <option value="teenager">Teenager</option>
+            <option value="adult">Adult</option>
+            <option value="senior">Senior</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Country</label>
+          <input id="f-country" placeholder="e.g. NG" style="width:80px">
+        </div>
+        <div class="filter-group">
+          <label>Min Age</label>
+          <input id="f-min-age" type="number" placeholder="0" style="width:70px">
+        </div>
+        <div class="filter-group">
+          <label>Max Age</label>
+          <input id="f-max-age" type="number" placeholder="100" style="width:70px">
+        </div>
+        <div class="filter-group">
+          <label>Sort By</label>
+          <select id="f-sort">
+            <option value="">Default</option>
+            <option value="age">Age</option>
+            <option value="gender_probability">Gender Prob.</option>
+            <option value="created_at">Created At</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Order</label>
+          <select id="f-order">
+            <option value="asc">Asc</option>
+            <option value="desc">Desc</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>&nbsp;</label>
+          <button class="btn btn-primary" onclick="loadProfiles(1)">Filter</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th><th>Gender</th><th>Age</th>
+                <th>Age Group</th><th>Country</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="profiles-tbody">
+              <tr><td colspan="6" class="loader">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button id="prev-btn" onclick="changePage(-1)" disabled>← Prev</button>
+          <span id="page-info">Page 1</span>
+          <button id="next-btn" onclick="changePage(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Create Profile Modal -->
+  <div id="modal" style="display:none;position:fixed;inset:0;background:#00000088;z-index:100;align-items:center;justify-content:center">
+    <div class="card" style="width:400px;margin:0">
+      <h2 style="font-size:18px;color:#e6edf3;margin-bottom:16px">Create Profile</h2>
+      <div class="filter-group" style="margin-bottom:16px">
+        <label>Full Name</label>
+        <input id="new-name" placeholder="e.g. John Doe" style="width:100%">
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="createProfile()">Create</button>
+      </div>
+      <div id="modal-msg" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/profiles.js"></script>
+</body>
+</html>
